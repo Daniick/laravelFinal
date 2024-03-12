@@ -103,7 +103,7 @@ class AuthController extends Controller
         }
         $user = User::create(array_merge(
             $validator->validate(),
-            ['clave' => bcrypt($request->clave)]
+            ['password' => bcrypt($request->password)] // Corregido
         ));
         Bitacora::add("Usuario creado con id: {$user->id}");
 

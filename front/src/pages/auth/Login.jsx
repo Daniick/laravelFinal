@@ -11,10 +11,10 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <div className="flex items-center justify-center min-h-screen p-4">
+    <div className="flex items-center justify-center min-h-screen p-4 ">
       <div className="bg-secondary-100 p-8 rounded-xl shadow-2xl w-auto lg:w-[450px]">
-        <h1 className="text-3xl text-center uppercase font-bold tracking-[5px] text-white mb-8">
-          Iniciar <span className="text-[#4791ff]">sesión</span>
+        <h1 className="text-3xl text-center uppercase font-bold tracking-[5px] text-black mb-8">
+          Iniciar <span className="text-black">sesión</span>
         </h1>
         <form className="mb-8">
           <button className="flex items-center justify-center w-full gap-4 px-4 py-3 mb-8 text-gray-100 rounded-full bg-secondary-900">
