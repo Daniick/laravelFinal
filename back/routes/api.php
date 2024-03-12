@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\EstadoController;
 use App\Http\Controllers\PaginaController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
@@ -40,3 +41,5 @@ Route::resource('/roles', RoleController::class);
 Route::resource('/usuarios', UserController::class);
 
 Route::resource('/paginas', PaginaController::class);
+
+Route::resource('/estados', EstadoController::class);

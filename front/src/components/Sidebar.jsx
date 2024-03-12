@@ -14,6 +14,9 @@ import {
 import { LuLayoutDashboard } from "react-icons/lu";
 
 const Sidebar = () => {
+  const handleLogout = () => {
+    logoutUser();
+  };
   const [showMenu, setShowMenu] = useState(false);
   const [showSubmenu, setShowSubmenu] = useState(false);
   return (
@@ -80,14 +83,14 @@ const Sidebar = () => {
                     Inventario
                   </Link>
                 </li>
-                 <li>
+                <li>
                   <Link
                     to="/Proveedores"
                     className="py-2 px-4 border-l border-gray-500 ml-6 block relative before:w-3 before:h-3 before:absolute before:bg-[#4791ff] before:rounded-full before:-left-[6.5px] before:top-1/2 before:-translate-y-1/2 before:border-4 before:border-white-100 text-white transition-colors hover:text-gray-500"
                   >
                     Proveedores
                   </Link>
-                </li> 
+                </li>
               </ul>
             </li>
             <li>

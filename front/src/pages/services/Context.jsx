@@ -3,7 +3,6 @@ import { useContext, createContext } from "react";
 
 const MyContext = createContext();
 
-// eslint-disable-next-line react/prop-types
 export const MyProvider = ({ children }) => {
   const userStorage = localStorage.getItem("user");
   const userData =
@@ -14,8 +13,11 @@ export const MyProvider = ({ children }) => {
   const [user, setUser] = useState(userData);
 
   const loginUser = (userData) => {
-    localStorage.setItem("user", JSON.stringify(userData));
-    setUser(userData);
+    if (userData) {
+      console.log(userData);
+      localStorage.setItem("user", JSON.stringify(userData));
+      setUser(userData);
+    }
   };
 
   const logoutUser = () => {
@@ -30,5 +32,4 @@ export const MyProvider = ({ children }) => {
   );
 };
 
-// eslint-disable-next-line react-refresh/only-export-components
 export const useMyContext = () => useContext(MyContext);

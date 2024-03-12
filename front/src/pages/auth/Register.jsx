@@ -52,6 +52,15 @@ const Register = () => {
             />
           </div>
           <div className="relative mb-10">
+            <RiMailLine className="absolute -translate-y-1/2 top-1/2 left-2 text-[#4791ff]" />
+            <input
+              type="date"
+              className="w-full py-3 pl-8 pr-4 text-white rounded-lg outline-none bg-purple-800"
+              placeholder="Correo electrónico"
+              name="fecha_nacimiento"
+            />
+          </div>
+          <div className="relative mb-10">
             <RiLockLine className="absolute -translate-y-1/2 top-1/2 left-2 text-[#4791ff]" />
             <input
               type={showPassword ? "text" : "password"}

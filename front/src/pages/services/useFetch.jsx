@@ -26,9 +26,12 @@ function useFetch() {
 
     const dataJson = await res.json();
 
+    console.log(res);
+    console.log(dataJson);
+
     if (res.ok) {
-      alert(dataJson.message);
-      return dataJson.data;
+      // alert(dataJson.message);
+      return dataJson;
     }
 
     if (res.status === 400) {
