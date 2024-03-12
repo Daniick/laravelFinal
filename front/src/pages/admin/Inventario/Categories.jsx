@@ -38,7 +38,7 @@ const statusColorMap = {
   vacation: "warning",
 };
 
-const INITIAL_VISIBLE_COLUMNS = ["id", "nombre", "codigo", "actions"];
+const INITIAL_VISIBLE_COLUMNS = ["id", "url", "nombre", "descripcion"];
 
 export default function App() {
   const iconClasses =
@@ -83,7 +83,7 @@ export default function App() {
   };
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/categoria")
+    fetch("http://127.0.0.1:8000/api/paginas")
       .then((res) => res.json())
       .then((data) => setProductos(data))
       .catch((error) => console.error(error));
@@ -145,18 +145,24 @@ export default function App() {
           <User avatarProps={{ radius: "lg", src: producto.avatar }}></User>
         );
 
+      case "url":
+        return (
+          <p className="text-bold text-tiny capitalize text-default-400 text-[16px]">
+            {producto.url}
+          </p>
+        );
       case "nombre":
         return (
           <p className="text-bold text-tiny capitalize text-default-400 text-[16px]">
             {producto.nombre}
           </p>
         );
-      case "codigo":
+      case "descripcion":
         return (
           <div className="flex flex-col">
-            <p className="text-bold text-small capitalize">{cellValue}</p>
+            <p className="text-bold text-small capitalize"></p>
             <p className="text-bold text-tiny capitalize text-default-400">
-              {producto.cod}
+              {producto.descripcion}
             </p>
           </div>
         );

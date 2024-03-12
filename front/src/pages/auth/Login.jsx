@@ -26,7 +26,7 @@ const Login = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen p-4 ">
-      {user && <Navigate to="/" />}
+      {user && <Navigate to="/dashboard" />}
       <div className="bg-secondary-100 p-8 rounded-xl shadow-2xl w-auto lg:w-[450px]">
         <h1 className="text-3xl text-center uppercase font-bold tracking-[5px] text-black mb-8">
           Iniciar <span className="text-black">sesión</span>
@@ -91,7 +91,7 @@ const Login = () => {
           <span className="flex items-center gap-2 transition-colors hover:text-[red] text-slate-100 ">
             ¿No tienes cuenta?{" "}
             <Link
-              to="/registro"
+              to="/register"
               className="transition-colors text-[#4791ff] hover:text-gray-100"
             >
               Registrate

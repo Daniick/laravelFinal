@@ -41,8 +41,7 @@ const statusColorMap = {
 const INITIAL_VISIBLE_COLUMNS = [
   "id",
   "nombre",
-  "email",
-  "compañia",
+  "fecha de creacion",
   "actions",
 ];
 
@@ -67,11 +66,13 @@ export default function ProveedorTabla() {
   const [productos, setProductos] = useState([]);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/proveedore")
+    fetch("http://127.0.0.1:8000/api/roles")
       .then((res) => res.json())
       .then((data) => setProductos(data))
       .catch((error) => console.error(error));
   }, []);
+
+  console.log(productos);
 
   const headerColumns = React.useMemo(() => {
     if (visibleColumns === "all") return columns;
@@ -124,6 +125,12 @@ export default function ProveedorTabla() {
     const cellValue = producto[columnKey];
     /* console.log(producto); */
     switch (columnKey) {
+      case "fecha de creacion":
+        return (
+          <p className="text-bold text-tiny capitalize text-default-400 text-[16px]">
+            {producto.fecha_creacion}
+          </p>
+        );
       case "actions":
         return (
           <div className="relative flex justify-end items-center gap-2">

@@ -37,17 +37,7 @@ const statusColorMap = {
   ordenado: "warning",
 };
 
-const INITIAL_VISIBLE_COLUMNS = [
-  "fecha",
-  "N° factura",
-  "proveedor",
-  // "estado de compra",
-  // "total",
-  // "pagado",
-  // "debido",
-  "estado de pago",
-  "actions",
-];
+const INITIAL_VISIBLE_COLUMNS = ["id", "descripcion", "fecha", "hora"];
 
 export default function App() {
   const iconClasses =
@@ -70,11 +60,13 @@ export default function App() {
   const [productos, setProductos] = useState([]);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/compra")
+    fetch("http://127.0.0.1:8000/api/bitacoras")
       .then((res) => res.json())
       .then((data) => setProductos(data))
       .catch((error) => console.error(error));
   }, []);
+
+  console.log(productos);
 
   const headerColumns = React.useMemo(() => {
     if (visibleColumns === "all") return columns;
@@ -89,7 +81,7 @@ export default function App() {
 
     if (filterValue) {
       filteredProductos = filteredProductos.filter((producto) =>
-        producto.nombre.toLowerCase().includes(filterValue.toLowerCase())
+        producto.descripcion.toLowerCase().includes(filterValue.toLowerCase())
       );
     }
     if (
@@ -127,54 +119,33 @@ export default function App() {
     const cellValue = columnKey;
 
     switch (columnKey) {
+      case "id":
+        return (
+          <p className="text-bold text-tiny capitalize text-default-400 text-[16px]">
+            {producto.id}
+          </p>
+        );
+
+      case "descripcion":
+        return (
+          <div className="flex flex-col">
+            <p className="text-bold text-tiny capitalize text-default-400">
+              {producto.descripcion}
+            </p>
+          </div>
+        );
+
       case "fecha":
         return (
           <p className="text-bold text-tiny capitalize text-default-400 text-[16px]">
-            {producto.created_at}
+            {producto.fecha}
           </p>
         );
-      case "N° factura":
+      case "hora":
         return (
           <div className="flex flex-col">
             <p className="text-bold text-tiny capitalize text-default-400">
-              {producto.num_factura}
-            </p>
-          </div>
-        );
-      case "proveedor":
-        return (
-          <div className="flex flex-col">
-            <p className="text-bold text-tiny capitalize text-default-400">
-              {producto.proveedore.compañia}
-            </p>
-          </div>
-        );
-      /* case "estado de compra":
-        return (
-          <Chip
-            className="capitalize"
-            color={statusOptions[cellValue.marca]}
-            size="sm"
-            variant="flat"
-          ></Chip>
-        ); */
-
-      case "estado de compra":
-        return (
-          <Chip
-            className="capitalize"
-            color={statusColorMap["recibido"]}
-            size="sm"
-            variant="flat"
-          >
-            {"recibido"}
-          </Chip>
-        );
-      case "total":
-        return (
-          <div className="flex flex-col">
-            <p className="text-bold text-tiny capitalize text-default-400">
-              {producto.productos[0].costo}
+              {producto.hora}
             </p>
           </div>
         );
@@ -193,52 +164,6 @@ export default function App() {
             <p className="text-bold text-tiny capitalize text-default-400">
               {/* funcion para que reste total menos pagado */}
             </p>
-          </div>
-        );
-
-      case "estado de pago":
-        return (
-          <Chip
-            className="capitalize"
-            color={statusOptions[cellValue.marca]}
-            size="sm"
-            variant="flat"
-          ></Chip>
-        );
-
-      /* case "categoria":
-        return (
-          <div className="flex flex-col">
-            <p className="text-bold text-small capitalize"></p>
-            <p className="text-bold text-tiny capitalize text-default-400">
-              {cellValue.nombre}
-            </p>
-          </div>
-        ); */
-
-      case "actions":
-        return (
-          <div className="relative flex justify-end items-center gap-2">
-            <Dropdown>
-              <DropdownTrigger>
-                <Button isIconOnly size="sm" variant="light">
-                  <VerticalDotsIcon className="text-default-300" />
-                </Button>
-              </DropdownTrigger>
-              <DropdownMenu>
-                <DropdownItem
-                  startContent={<EyeIcon className={iconClasses} />}
-                >
-                  <Link to={`/compras/view/${producto.id}`}>View</Link>
-                </DropdownItem>
-
-                <DropdownItem
-                  startContent={<DeleteIcon className={iconClasses} />}
-                >
-                  Delete
-                </DropdownItem>
-              </DropdownMenu>
-            </Dropdown>
           </div>
         );
 

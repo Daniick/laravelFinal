@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('nombre')->unique();
             $table->dateTime('fecha_creacion')->useCurrent();
             $table->dateTime('fecha_modificacion')->nullable();
+            $table->unsignedBigInteger('id_estado')->default(1);
+            $table->foreign('id_estado')->references('id')->on('estados');
             $table->string('usuario_creacion')->nullable();
             $table->string('usuario_modificacion')->nullable();
         });

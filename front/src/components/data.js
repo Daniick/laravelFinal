@@ -3,25 +3,16 @@ const columns = [
   { name: "ID", uid: "id", sortable: true },
   { name: "IMAGEN", uid: "imagen" },
   { name: "NOMBRE", uid: "nombre", sortable: true },
-  { name: "CODIGO", uid: "codigo", sortable: true },
-  { name: "MARCA", uid: "marca", sortable: true },
-  { name: "CATEGORIA", uid: "categoria" },
-  {name: "STATUS", uid: "status", sortable: true},
-  { name: "COSTO", uid: "costo" },
-  { name: "PRECIO", uid: "precio", sortable: true },
+  { name: "STATUS", uid: "status", sortable: true },
   { name: "EMAIL", uid: "email" },
-  { name: "COMPAÑIA", uid: "compañia" },
+  { name: "DESCRIPCION", uid: "descripcion" },
   { name: "FECHA", uid: "fecha" },
-  { name: "N° FACTURA", uid: "N° factura" },
-  { name: "PROVEEDOR", uid: "proveedor" },
-  { name: "ESTADO DE COMPRA", uid: "estado de compra" },
-  { name: "TOTAL", uid: "total" },
-  { name: "PAGADO", uid: "pagado" },
-  { name: "DEBIDO", uid: "debido" },
-  { name: "ESTADO DE PAGO", uid: "estado de pago" },
+  { name: "HORA", uid: "hora" },
+  { name: "URL", uid: "url" },
+  { name: "FECHA DE CREACION", uid: "fecha de creacion" },
+  { name: "ROL", uid: "rol" },
+  { name: "ESTADO", uid: "estado" },
   { name: "ACTIONS", uid: "actions" },
-
- 
 ];
 
 const statusOptions = [
@@ -60,8 +51,7 @@ const users = [
     categoria: "22",
     avatar: "https://i.pravatar.cc/150?u=a04258114e29026702d",
     costo: "380000 COP",
-  }
- 
+  },
 ];
 
 export { columns, users, statusOptions };

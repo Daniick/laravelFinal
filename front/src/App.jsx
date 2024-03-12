@@ -31,26 +31,27 @@ function App() {
           <Route path="register" element={<Register />} />
           <Route path="/" element={<LayoutAdmin />}>
             <Route path="dashboard" element={<Home />} />
-            <Route path="inventario" element={<Inventario />} />
+
+            <Route path="usuarios" element={<Inventario />} />
 
             <Route path="compras" element={<Compras />} />
-            <Route path="compras/add" element={<AddBill />} />
-            <Route path="compras/view/:id" element={<ShowFactura />} />
+            {/* <Route path="compras/add" element={<AddBill />} />
+            <Route path="compras/view/:id" element={<ShowFactura />} /> */}
 
-            <Route path="inventario/add" element={<Add />} />
-            <Route path="inventario/edit/:id" element={<EditProduct />} />
+            {/* <Route path="inventario/add" element={<Add />} />
+            <Route path="inventario/edit/:id" element={<EditProduct />} /> */}
 
-            <Route path="categorias" element={<Categorias />} />
-            <Route path="categorias/add" element={<AddCategories />} />
+            <Route path="paginas" element={<Categorias />} />
+            {/* <Route path="categorias/add" element={<AddCategories />} /> */}
 
-            <Route path="categorias/edit/:id" element={<EditCategories />} />
+            {/* <Route path="categorias/edit/:id" element={<EditCategories />} /> */}
 
-            <Route path="proveedores" element={<Proveedores />} />
-            <Route path="proveedores/add" element={<AddProveedor />} />
-            <Route
+            <Route path="roles" element={<Proveedores />} />
+            {/* <Route path="proveedores/add" element={<AddProveedor />} /> */}
+            {/* <Route
               path="proveedores/EditProveedo/:id"
               element={<EditProveedo />}
-            />
+            /> */}
           </Route>
 
           <Route path="*" element={<Error404 />} />

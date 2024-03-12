@@ -3,14 +3,18 @@ import { Link } from "react-router-dom";
 import CardTicket from "../../../components/CardTicket";
 import { RiArrowLeftSLine, RiArrowRightSLine } from "react-icons/ri";
 import { Menu, MenuItem, MenuButton } from "@szhsin/react-menu";
+import { useMyContext } from "../../services/Context";
 import "@szhsin/react-menu/dist/index.css";
 import "@szhsin/react-menu/dist/transitions/slide.css";
 
 const Home = () => {
+  const { user } = useMyContext();
   return (
     <div>
       <div className="flex items-center justify-between mb-10">
-        <h1 className="text-4xl text-black">Bienvenido Administrador!</h1>
+        <h1 className="text-4xl text-black">
+          Bienvenido {user && user.user.name}!
+        </h1>
         <div className="flex items-center gap-2 text-3xl">
           <RiArrowLeftSLine className="transition-colors hover:cursor-pointer hover:text-white" />
           <RiArrowRightSLine className="transition-colors hover:cursor-pointer hover:text-white" />

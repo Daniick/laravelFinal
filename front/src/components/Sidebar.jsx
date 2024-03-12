@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useMyContext } from "../pages/services/Context";
 // Icons
 import {
   RiBarChart2Line,
@@ -10,10 +11,14 @@ import {
   RiArrowRightSLine,
   RiMenu3Line,
   RiCloseLine,
+  RiPagesLine,
 } from "react-icons/ri";
+import { FaCashRegister, FaRegUser } from "react-icons/fa";
+import { GrUserAdmin } from "react-icons/gr";
 import { LuLayoutDashboard } from "react-icons/lu";
 
 const Sidebar = () => {
+  const { logoutUser } = useMyContext();
   const handleLogout = () => {
     logoutUser();
   };
@@ -45,7 +50,31 @@ const Sidebar = () => {
                 to="/compras"
                 className="flex items-center gap-4 px-4 py-2 text-white transition-colors rounded-lg hover:bg-secondary-900"
               >
-                <RiBarChart2Line className="text-[#4791ff]" /> Compras
+                <FaCashRegister className="text-white" /> Bitacora
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/usuarios"
+                className="flex items-center gap-4 px-4 py-2 text-white transition-colors rounded-lg hover:bg-secondary-900"
+              >
+                <FaRegUser className="text-[#4791ff]" /> Usuarios
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/paginas"
+                className="flex items-center gap-4 px-4 py-2 text-white transition-colors rounded-lg hover:bg-secondary-900"
+              >
+                <RiPagesLine className="text-[#4791ff]" /> Paginas
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/roles"
+                className="flex items-center gap-4 px-4 py-2 text-white transition-colors rounded-lg hover:bg-secondary-900"
+              >
+                <GrUserAdmin className="text-[#4791ff]" /> Roles
               </Link>
             </li>
             <li>
@@ -93,23 +122,15 @@ const Sidebar = () => {
                 </li>
               </ul>
             </li>
-            <li>
-              <Link
-                to="/tickets"
-                className="flex items-center gap-4 px-4 py-2 text-white transition-colors rounded-lg hover:bg-secondary-900"
-              >
-                <RiCustomerService2Line className="text-[#4791ff]" /> Soporte
-                técnico
-              </Link>
-            </li>
-            <li>
+
+            {/* <li>
               <Link
                 to="/"
                 className="flex items-center gap-4 px-4 py-2 text-white transition-colors rounded-lg hover:bg-secondary-900"
               >
                 <RiCalendarTodoLine className="text-[#4791ff]" /> Calendario
               </Link>
-            </li>
+            </li> */}
           </ul>
         </div>
         <nav>
@@ -117,7 +138,8 @@ const Sidebar = () => {
             to="/"
             className="flex items-center gap-4 px-4 py-2 text-white transition-colors rounded-lg hover:bg-secondary-900"
           >
-            <RiLogoutCircleRLine className="text-[#4791ff]" /> Cerrar sesión
+            <RiLogoutCircleRLine className="text-[#4791ff]" />{" "}
+            <button onClick={handleLogout}>Cerrar sesión</button>
           </Link>
         </nav>
       </div>

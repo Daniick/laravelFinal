@@ -38,13 +38,13 @@ const statusColorMap = {
 };
 
 const INITIAL_VISIBLE_COLUMNS = [
+  "id",
   "imagen",
   "nombre",
-  "codigo",
-  "marca",
-  "categoria",
-  "costo",
-  "precio",
+  "email",
+  "fecha de creacion",
+  "rol",
+  "estado",
   "actions",
 ];
 
@@ -69,11 +69,13 @@ export default function App() {
   const [productos, setProductos] = useState([]);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/producto")
+    fetch("http://127.0.0.1:8000/api/usuarios")
       .then((res) => res.json())
       .then((data) => setProductos(data))
       .catch((error) => console.error(error));
   }, []);
+
+  console.log(productos);
 
   const headerColumns = React.useMemo(() => {
     if (visibleColumns === "all") return columns;
@@ -135,46 +137,46 @@ export default function App() {
       case "nombre":
         return (
           <p className="text-bold text-tiny capitalize text-default-400 text-[16px]">
-            {producto.nombre}
+            {producto.name} , {producto.apellido}
           </p>
         );
-      case "codigo":
-        return (
-          <div className="flex flex-col">
-            <p className="text-bold text-small capitalize">{cellValue}</p>
-            <p className="text-bold text-tiny capitalize text-default-400">
-              {producto.cod}
-            </p>
-          </div>
-        );
-      case "marca":
-        return (
-          <Chip
-            className="capitalize"
-            color={statusColorMap[cellValue.marca]}
-            size="sm"
-            variant="flat"
-          >
-            {cellValue}
-          </Chip>
-        );
 
-      case "categoria":
+      case "email":
         return (
           <div className="flex flex-col">
             <p className="text-bold text-small capitalize"></p>
             <p className="text-bold text-tiny capitalize text-default-400">
-              {cellValue.nombre}
+              {producto.email}
             </p>
           </div>
         );
 
-      case "costo":
+      case "fecha de creacion":
         return (
           <div className="flex flex-col">
             <p className="text-bold text-small capitalize"></p>
             <p className="text-bold text-tiny capitalize text-default-400">
-              {producto.costo}
+              {producto.fecha_creacion}
+            </p>
+          </div>
+        );
+
+      case "estado":
+        return (
+          <div className="flex flex-col">
+            <p className="text-bold text-small capitalize"></p>
+            <p className="text-bold text-tiny capitalize text-default-400">
+              {producto.id_estado}
+            </p>
+          </div>
+        );
+
+      case "rol":
+        return (
+          <div className="flex flex-col">
+            <p className="text-bold text-small capitalize"></p>
+            <p className="text-bold text-tiny capitalize text-default-400">
+              {producto.id_rol}
             </p>
           </div>
         );
