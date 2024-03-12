@@ -3,19 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bitacora;
-use App\Models\usuario;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
-class UsuarioController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $usuarios = usuario::all();
-        return response()->json($usuarios, 200);
+        $user = User::all();
+        return response()->json($user, 200);
     }
 
     /**
@@ -32,21 +32,21 @@ class UsuarioController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            "nombre" => 'required|string',
+            "name" => 'required|string',
             "apellido" => 'required|string',
-            "correo" => 'required|string',
-            "clave" => 'required|string',
+            "email" => 'required|string',
+            "password" => 'required|string',
             "id_rol" => 'integer',
 
         ]);
 
         $data = $request->all();
-        $data['clave'] = Hash::make($request->clave);
+        $data['password'] = Hash::make($request->password);
 
-        $usuario = usuario::create($data);
+        $user = User::create($data);
 
-        Bitacora::add("Usuario creado con id: {$usuario->id}");
-        return response()->json($usuario, 201);
+        Bitacora::add("Usuario creado con id: {$user->id}");
+        return response()->json($user, 201);
     }
 
     /**
@@ -54,14 +54,14 @@ class UsuarioController extends Controller
      */
     public function show($id)
     {
-        $usuario = usuario::findOrFail($id);
-        return response()->json(['usuario: ' => $usuario], 200);
+        $user = User::findOrFail($id);
+        return response()->json(['user: ' => $user], 200);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(usuario $usuario)
+    public function edit(User $user)
     {
         //
     }
@@ -72,22 +72,22 @@ class UsuarioController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            "nombre" => 'required|string',
+            "name" => 'required|string',
             "apellido" => 'required|string',
-            "correo" => 'required|string',
-            "clave" => 'required|string',
+            "email" => 'required|string',
+            "password" => 'required|string',
             "id_rol" => 'required|string',
         ]);
 
-        $usuario = usuario::findOrFail($id);
+        $user = User::findOrFail($id);
         $data = $request->all();
 
-        if ($request->has('clave')) {
-            $data['clave'] = Hash::make($request->clave);
+        if ($request->has('password')) {
+            $data['password'] = Hash::make($request->password);
         }
 
-        $usuario->update($data);
-        return response()->json($usuario, 200);
+        $user->update($data);
+        return response()->json($user, 200);
     }
 
 
@@ -96,8 +96,8 @@ class UsuarioController extends Controller
      */
     public function destroy($id)
     {
-        $usuario = usuario::findOrFail($id);
-        $usuario->delete();
-        return response()->json(['usuario: ' => $usuario], 200);
+        $User = User::findOrFail($id);
+        $User->delete();
+        return response()->json(['User: ' => $User], 200);
     }
 }
