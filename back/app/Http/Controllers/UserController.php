@@ -99,7 +99,7 @@ class UserController extends Controller
     {
         $User = User::findOrFail($id);
         $User->delete();
-        Bitacora::add("Usuario eliminado con id: {$User->id}");
+        Bitacora::add("Se ah eliminado el Usuario con id: {$User->id}");
         return response()->json(['User: ' => $User], 200);
     }
 }

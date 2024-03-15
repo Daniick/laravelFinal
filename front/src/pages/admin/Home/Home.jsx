@@ -21,7 +21,6 @@ const Home = () => {
         </div>
       </div>
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ">
-        {/* Card */}
         <CardTicket
           ticket="total"
           totalTickets="Bitacoras"
@@ -47,26 +46,31 @@ const Home = () => {
           enlace="/roles/add"
         />
       </div>
-      <div>
-        <h1 className="my-10 text-2xl text-black">Información</h1>
-      </div>
-      <div className="p-8 bg-[#1E1F25] rounded-xl text-white flex flex-col text-center px-4">
-        <h1 className="text-3xl mb-5">
-          Hoy 8 De Marzo Celebra{" "}
-          <span className="text-red-500 ">El Dia De La Mujer</span>
-        </h1>
-        <div className="text-xl flex flex-col items-center gap-5">
-          "En este Día Internacional de la Mujer, quiero enviar un sincero
-          reconocimiento a todas las mujeres que forman parte de nuestro equipo.
-          Vuestra dedicación, talento y compromiso son fundamentales para el
-          éxito de nuestra empresa. Hoy celebramos su fuerza, su valentía y su
-          contribución invaluable. Sigamos trabajando juntos para construir un
-          entorno laboral donde todas las voces sean escuchadas y todas las
-          oportunidades sean accesibles para cada una de ustedes. ¡Gracias por
-          todo lo que hacen cada día! Feliz Día de la Mujer. 🌟💼
-          #DíaInternacionalDeLaMujer #MujeresEnElTrabajo"
+
+      <div className=" my-10 p-8 bg-black rounded-xl text-white flex flex-col text-center px-4">
+        <h1 className="text-3xl mb-5 text-red-500">Gracias</h1>
+        <div className="text-xl flex flex-col items-center gap-5 mx-4">
+          Querido equipo del Funval, Quiero expresar mi más sincero
+          agradecimiento por haberme brindado la oportunidad de formar parte de
+          esta experiencia transformadora durante los últimos cinco meses. Desde
+          el primer día, su dedicación y compromiso hacia nuestro crecimiento
+          han sido inspiradores. A Jorge Sosa y a Halorld Carazas, mis estimados
+          maestros, les debo un agradecimiento especial. Su liderazgo y
+          sabiduría han sido fundamentales en mi aprendizaje. Cada clase, cada
+          consejo y cada retroalimentación han sido invaluables. Este bootcamp
+          no solo me ha proporcionado habilidades técnicas, sino que también me
+          ha enseñado el valor del trabajo en equipo y la perseverancia. Estoy
+          profundamente agradecido por haber tenido la oportunidad de aprender y
+          crecer en un entorno tan enriquecedor y de contar con el apoyo
+          incondicional de cada uno de ustedes. A medida que continúo mi viaje
+          profesional, llevaré conmigo las lecciones aprendidas aquí y las
+          aplicaré en cada paso que dé. Estoy emocionado por lo que el futuro
+          tiene reservado y confío en que la sólida base que he adquirido aquí
+          me llevará hacia el éxito. Una vez más, gracias de todo corazón por
+          esta experiencia invaluable. Estoy eternamente agradecido y espero
+          mantenerme en contacto en el futuro.
           <img
-            src="https://prensaregional.pe/wp-content/uploads/2019/02/8-de-marzo-se-celebra-el-D%C3%ADa-Internacional-de-la-Mujer.jpg"
+            src="https://images.pexels.com/photos/267885/pexels-photo-267885.jpeg?cs=srgb&dl=pexels-pixabay-267885.jpg&fm=jpg"
             alt=""
             className="w-[600px] h-[500px] "
           />
