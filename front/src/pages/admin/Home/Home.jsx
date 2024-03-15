@@ -24,27 +24,27 @@ const Home = () => {
         {/* Card */}
         <CardTicket
           ticket="total"
-          totalTickets="Compras"
-          text="Agregar Compra"
-          enlace="/compras/add"
+          totalTickets="Bitacoras"
+          text="Ver Bitacoras"
+          enlace="/compras"
         />
         <CardTicket
           ticket="pending"
-          totalTickets="Inventario"
-          text="Agregar Producto"
-          enlace="/inventario/add"
+          totalTickets="Usuarios"
+          text="Agregar Usuario"
+          enlace="/usuarios/add"
         />
         <CardTicket
           ticket="inProcess"
-          totalTickets="Categorias"
-          text="Agregar Categoria"
-          enlace="/categorias/add"
+          totalTickets="Paginas"
+          text="Agregar Pagina"
+          enlace="/paginas/add"
         />
         <CardTicket
           ticket="close"
-          totalTickets="Proveedores"
-          text="Agregar Proveedor"
-          enlace="/proveedores/add"
+          totalTickets="Roles"
+          text="Agregar Rol"
+          enlace="/roles/add"
         />
       </div>
       <div>

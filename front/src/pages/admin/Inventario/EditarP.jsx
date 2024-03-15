@@ -4,14 +4,15 @@ import { useParams, Link } from "react-router-dom";
 
 const EditarProducto = () => {
   const { id } = useParams();
+
+  const [usuario, setUsuario] = useState([]);
   const [formData, setFormData] = useState({
-    nombre: "",
-    cod: "",
-    precio: "",
-    marca: "",
-    id_categoria: "",
-    cantidad: "",
-    foto: null,
+    name: "",
+    apellido: "",
+    email: "",
+    password: "",
+    id_rol: "",
+    fecha_nacimiento: "",
   });
 
   const handleInputChange = (event) => {
@@ -22,12 +23,7 @@ const EditarProducto = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const data = new FormData();
-    for (const key in formData) {
-      data.append(key, formData[key]);
-    }
-
-    fetch(`http://127.0.0.1:8000/api/producto/${id}`, {
+    fetch(`http://127.0.0.1:8000/api/usuarios/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -38,133 +34,118 @@ const EditarProducto = () => {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        // Limpiar el formulario después de enviar los datos
         setFormData({
-          nombre: "",
-          cod: "",
-          precio: "",
-          marca: "",
-          id_categoria: "",
-          cantidad: "",
-          foto: null,
+          name: "",
+          apellido: "",
+          email: "",
+          password: "",
+          id_rol: "",
+          fecha_nacimiento: "",
         });
       })
       .catch((error) => console.log(error));
   };
 
   useEffect(() => {
-    fetch(`http://127.0.0.1:8000/api/producto/${id}`)
+    fetch(`http://127.0.0.1:8000/api/roles`)
       .then((res) => res.json())
-      .then((data) => setFormData(data))
+      .then((data) => setUsuario(data))
       .catch((error) => console.error(error));
-  }, [id]);
+  }, []);
 
   return (
     <div>
-
       <div className="w-[100%] h-[60%] mx-auto p-6 bg-white rounded shadow">
         <div className="flex justify-between">
           <h2 className="text-xl font-semibold mb-4">Actualizar Producto</h2>
-
-          <Button color="primary" className="w-[80px]">
-          <Link to="/inventario">Back</Link>
-          </Button>
-          
+          <Link to="/usuarios">
+            <Button color="primary" className="w-[80px]">
+              Back
+            </Button>
+          </Link>
         </div>
+
         <form onSubmit={handleSubmit} className="grid grid-cols-3 gap-12">
           <div className="">
             <label
-              htmlFor="nombre"
+              htmlFor="name"
               className="block text-sm font-medium text-gray-700"
             >
               Nombre
             </label>
             <input
               type="text"
-              id="nombre"
-              name="nombre"
+              id="name"
+              name="name"
               className="mt-1 p-2 border rounded w-full"
-              placeholder={formData.nombre}
+              placeholder="Ingrese Nuevo Nombre"
               onChange={handleInputChange}
             />
             <label
-              htmlFor="cod"
+              htmlFor="apellido"
               className="block text-sm font-medium text-gray-700"
             >
-              Código
+              Apellido
             </label>
             <input
               type="text"
-              id="cod"
-              name="cod"
+              id="apellido"
+              name="apellido"
               className="mt-1 p-2 border rounded w-full"
-              placeholder={formData.cod}
+              placeholder="Ingrese Nuevo Apellido"
               onChange={handleInputChange}
             />
             <label
-              htmlFor="precio"
+              htmlFor="email"
               className="block text-sm font-medium text-gray-700"
             >
-              Precio
+              email
             </label>
 
             <input
-              type="text"
-              id="precio"
-              name="precio"
+              type="email"
+              id="email"
+              name="email"
               className="mt-1 p-2 border rounded w-full"
-              placeholder={formData.precio}
-              value={formData.precio}
-              onChange={(e) => {
-                // Permite ingresar solo números y un máximo de dos decimales
-                const regex = /^[0-9]*(\.[0-9]{0,2})?$/;
-                if (regex.test(e.target.value) || e.target.value === "") {
-                  setFormData({ ...formData, precio: e.target.value });
-                }
-              }}
-            />
-            <label
-              htmlFor="marca"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Marca
-            </label>
-            <input
-              type="text"
-              id="marca"
-              name="marca"
-              className="mt-1 p-2 border rounded w-full"
-              placeholder={formData.marca}
+              placeholder="Ingrese Nuevo Email"
               onChange={handleInputChange}
             />
             <label
-              htmlFor="id_categoria"
+              htmlFor="password"
               className="block text-sm font-medium text-gray-700"
             >
-              Categoría
+              password
             </label>
             <input
-              type="number"
-              id="id_categoria"
-              name="id_categoria"
+              type="password"
+              id="password"
+              name="password"
               className="mt-1 p-2 border rounded w-full"
-              placeholder={formData.id_categoria}
+              placeholder="**************"
               onChange={handleInputChange}
             />
             <label
-              htmlFor="cantidad"
+              htmlFor="id_rol"
               className="block text-sm font-medium text-gray-700"
             >
-              Cantidad
+              Rol
             </label>
-            <input
-              type="number"
-              id="cantidad"
-              name="cantidad"
+            <select
+              name="id_rol"
+              id="id_rol"
               className="mt-1 p-2 border rounded w-full"
-              placeholder={formData.cantidad}
               onChange={handleInputChange}
-            />
+              value={formData.id_rol}
+            >
+              <option value="" disabled>
+                Selecciona un Rol
+              </option>
+              {usuario.map((item) => (
+                <option key={item.id} value={item.id}>
+                  {item.nombre}
+                </option>
+              ))}
+            </select>
           </div>
 
           <button

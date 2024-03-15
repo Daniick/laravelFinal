@@ -42,6 +42,7 @@ const INITIAL_VISIBLE_COLUMNS = [
   "id",
   "nombre",
   "fecha de creacion",
+  "estado",
   "actions",
 ];
 
@@ -72,7 +73,21 @@ export default function ProveedorTabla() {
       .catch((error) => console.error(error));
   }, []);
 
-  console.log(productos);
+  const handleDelete = (id) => {
+    fetch(`http://127.0.0.1:8000/api/roles/${id}`, {
+      method: "DELETE",
+    })
+      .then((response) => {
+        if (response.ok) {
+          setProductos(productos.filter((producto) => producto.id !== id));
+        } else {
+          console.error("Failed to delete user");
+        }
+      })
+      .catch((error) => {
+        console.error("Error deleting user:", error);
+      });
+  };
 
   const headerColumns = React.useMemo(() => {
     if (visibleColumns === "all") return columns;
@@ -131,6 +146,12 @@ export default function ProveedorTabla() {
             {producto.fecha_creacion}
           </p>
         );
+      case "estado":
+        return (
+          <p className="text-bold text-tiny capitalize text-default-400 text-[16px]">
+            {producto.estado.nombre}
+          </p>
+        );
       case "actions":
         return (
           <div className="relative flex justify-end items-center gap-2">
@@ -144,12 +165,11 @@ export default function ProveedorTabla() {
                 <DropdownItem
                   startContent={<EditIcon className={iconClasses} />}
                 >
-                  <Link to={`/proveedores/EditProveedo/${producto.id}`}>
-                    Edit
-                  </Link>
+                  <Link to={`/roles/edit/${producto.id}`}>Cambiar Estado</Link>
                 </DropdownItem>
                 <DropdownItem
                   startContent={<DeleteIcon className={iconClasses} />}
+                  onClick={() => handleDelete(producto.id)}
                 >
                   Delete
                 </DropdownItem>
@@ -320,9 +340,11 @@ export default function ProveedorTabla() {
             Export to PDF
           </button>
           <div>
-            <Button color="primary" className="w-[130px] absolute right-0">
-              <Link to="/proveedores/add">Añadir Proveedor</Link>
-            </Button>
+            <Link to="/roles/add">
+              <Button color="primary" className="w-[130px] absolute right-0">
+                Añadir Rol
+              </Button>
+            </Link>
           </div>
         </div>
         <div>

@@ -14,4 +14,9 @@ class role extends Model
     protected $fillable = [
         'nombre'
     ];
+
+    public function estado()
+    {
+        return $this->belongsTo(estado::class, 'id_estado');
+    }
 }

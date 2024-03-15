@@ -14,7 +14,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user = User::all();
+        $user = User::with('role', 'estado')->get();
         return response()->json($user, 200);
     }
 
@@ -36,7 +36,7 @@ class UserController extends Controller
             "apellido" => 'required|string',
             "email" => 'required|string',
             "password" => 'required|string',
-            "id_rol" => 'integer',
+            "id_rol" => 'required',
 
         ]);
 
@@ -76,7 +76,7 @@ class UserController extends Controller
             "apellido" => 'required|string',
             "email" => 'required|string',
             "password" => 'required|string',
-            "id_rol" => 'required|string',
+            "id_rol" => 'required',
         ]);
 
         $user = User::findOrFail($id);
@@ -87,6 +87,7 @@ class UserController extends Controller
         }
 
         $user->update($data);
+        Bitacora::add("Usuario Actualizado con id: {$user->id}");
         return response()->json($user, 200);
     }
 
@@ -98,6 +99,7 @@ class UserController extends Controller
     {
         $User = User::findOrFail($id);
         $User->delete();
+        Bitacora::add("Usuario eliminado con id: {$User->id}");
         return response()->json(['User: ' => $User], 200);
     }
 }

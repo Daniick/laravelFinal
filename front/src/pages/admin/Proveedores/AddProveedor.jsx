@@ -4,19 +4,9 @@ import { Link } from "react-router-dom";
 
 function AddProveedor() {
   const [nombre, setNombre] = useState("");
-  const [email, setEmail] = useState("");
-  const [compañia, setCompañia] = useState("");
 
   const handleNombreChange = (event) => {
     setNombre(event.target.value);
-  };
-
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
-  };
-
-  const handleCompañiaChange = (event) => {
-    setCompañia(event.target.value);
   };
 
   const handleSubmit = (e) => {
@@ -24,13 +14,11 @@ function AddProveedor() {
 
     const data = {
       nombre: nombre,
-      email: email,
-      compañia: compañia,
     };
 
     console.log("Proveedor data submitted:", data);
 
-    fetch("http://127.0.0.1:8000/api/proveedore", {
+    fetch("http://127.0.0.1:8000/api/roles", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -43,8 +31,6 @@ function AddProveedor() {
         console.log(data);
         // Borrar los datos del input
         setNombre("");
-        setEmail("");
-        setCompañia("");
       })
       .catch((error) => console.log(error));
   };
@@ -53,10 +39,12 @@ function AddProveedor() {
     <>
       <div className="w-[100%] h-[70%] mx-auto p-6 bg-white rounded shadow">
         <div className="flex justify-between">
-          <h2 className="text-xl font-semibold mb-4">Añadir Proveedor</h2>
-          <Button color="primary" className="w-[80px]">
-            <Link to="/proveedores">Back</Link>
-          </Button>
+          <h2 className="text-xl font-semibold mb-4">Añadir Rol</h2>
+          <Link to="/roles">
+            <Button color="primary" className="w-[80px]">
+              Back
+            </Button>
+          </Link>
         </div>
         <form onSubmit={handleSubmit} className="grid grid-cols-3 gap-12">
           <div className="">
@@ -64,7 +52,7 @@ function AddProveedor() {
               htmlFor="nombre"
               className="block text-sm font-medium text-gray-700"
             >
-              Nombre
+              Nombre De Rol
             </label>
             <input
               type="text"
@@ -73,34 +61,6 @@ function AddProveedor() {
               className="mt-1 p-2 border rounded w-full"
               value={nombre}
               onChange={handleNombreChange}
-            />
-            <label
-              htmlFor="email"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Email
-            </label>
-            <input
-              type="text"
-              id="email"
-              name="email"
-              className="mt-1 p-2 border rounded w-full"
-              value={email}
-              onChange={handleEmailChange}
-            />
-            <label
-              htmlFor="compañia"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Compañia
-            </label>
-            <input
-              type="text"
-              id="compañia"
-              name="compañia"
-              className="mt-1 p-2 border rounded w-full"
-              value={compañia}
-              onChange={handleCompañiaChange}
             />
           </div>
 

@@ -38,7 +38,13 @@ const statusColorMap = {
   vacation: "warning",
 };
 
-const INITIAL_VISIBLE_COLUMNS = ["id", "url", "nombre", "descripcion"];
+const INITIAL_VISIBLE_COLUMNS = [
+  "id",
+  "url",
+  "nombre",
+  "descripcion",
+  "actions",
+];
 
 export default function App() {
   const iconClasses =
@@ -61,8 +67,8 @@ export default function App() {
   // Estado para los datos obtenidos de la API
   const [productos, setProductos] = useState([]);
   const handleDelete = (id) => {
-    if (window.confirm("¿Estás seguro de que deseas eliminar este producto?")) {
-      fetch(`http://127.0.0.1:8000/api/categoria/${id}`, {
+    if (window.confirm("¿Estás seguro de que deseas eliminar esta URL?")) {
+      fetch(`http://127.0.0.1:8000/api/paginas/${id}`, {
         method: "DELETE",
       })
         .then((response) => {
@@ -376,9 +382,11 @@ export default function App() {
             Export to PDF
           </button>
           <div>
-            <Button color="primary" className="w-[130px] absolute right-0">
-              <Link to="/categorias/add">Añadir Categoria</Link>
-            </Button>
+            <Link to="/paginas/add">
+              <Button color="primary" className="w-[130px] absolute right-0">
+                Añadir Pagina
+              </Button>
+            </Link>
           </div>
         </div>
         <div></div>

@@ -14,7 +14,7 @@ export const MyProvider = ({ children }) => {
 
   const loginUser = (userData) => {
     if (userData) {
-      console.log(userData);
+      // console.log(userData);
       localStorage.setItem("user", JSON.stringify(userData));
       setUser(userData);
     }

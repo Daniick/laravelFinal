@@ -27,57 +27,57 @@ const Sidebar = () => {
   return (
     <>
       <div
-        className={`xl:h-[100vh] overflow-y-scroll fixed xl:static w-[80%] md:w-[40%] lg:w-[30%] xl:w-auto h-full top-0 bg-[#0A0A0A] p-4 flex flex-col justify-between z-50 ${
+        className={`xl:h-[100vh] overflow-y-scroll fixed xl:static w-[80%] md:w-[40%] lg:w-[30%] xl:w-auto h-full top-0 bg-black border-r-red-500 p-4 flex flex-col justify-between z-50 ${
           showMenu ? "left-0" : "-left-full"
         } transition-all`}
       >
         <div>
-          <h1 className="mb-10 text-2xl font-bold text-center text-white">
-            Admin<span className="text-4xl text-[#4791ff]">.</span>
+          <h1 className="mb-20 text-2xl font-bold text-center text-white">
+            Admin<span className="text-4xl text-yellow-300">.</span>
           </h1>
-          <ul>
+          <ul className="">
             <li>
               <Link
                 to="/dashboard"
-                className="flex items-center gap-4 px-4 py-2 text-white transition-colors rounded-lg hover:bg-secondary-900"
+                className="flex items-center mb-5 gap-4 px-4 py-4 text-white transition-colors rounded-lg hover:bg-zinc-800 "
               >
-                <LuLayoutDashboard className="text-[#4791ff]" />
+                <LuLayoutDashboard className="text-yellow-300 " />
                 Dashboard
               </Link>
             </li>
             <li>
               <Link
                 to="/compras"
-                className="flex items-center gap-4 px-4 py-2 text-white transition-colors rounded-lg hover:bg-secondary-900"
+                className="flex items-center mb-5 gap-4 px-4 py-4 text-white transition-colors rounded-lg hover:bg-zinc-800"
               >
-                <FaCashRegister className="text-white" /> Bitacora
+                <FaCashRegister className="text-yellow-300" /> Bitacora
               </Link>
             </li>
             <li>
               <Link
                 to="/usuarios"
-                className="flex items-center gap-4 px-4 py-2 text-white transition-colors rounded-lg hover:bg-secondary-900"
+                className="flex items-center mb-5 gap-4 px-4 py-4 text-white transition-colors rounded-lg hover:bg-zinc-800"
               >
-                <FaRegUser className="text-[#4791ff]" /> Usuarios
+                <FaRegUser className="text-yellow-300" /> Usuarios
               </Link>
             </li>
             <li>
               <Link
                 to="/paginas"
-                className="flex items-center gap-4 px-4 py-2 text-white transition-colors rounded-lg hover:bg-secondary-900"
+                className="flex items-center mb-5 gap-4 px-4 py-4 text-white transition-colors rounded-lg hover:bg-zinc-800"
               >
-                <RiPagesLine className="text-[#4791ff]" /> Paginas
+                <RiPagesLine className="text-yellow-300" /> Paginas
               </Link>
             </li>
             <li>
               <Link
                 to="/roles"
-                className="flex items-center gap-4 px-4 py-2 text-white transition-colors rounded-lg hover:bg-secondary-900"
+                className="flex items-center mb-5 gap-4 px-4 py-4 text-white transition-colors rounded-lg hover:bg-zinc-800"
               >
-                <GrUserAdmin className="text-[#4791ff]" /> Roles
+                <GrUserAdmin className="text-yellow-300" /> Roles
               </Link>
             </li>
-            <li>
+            {/* <li>
               <button
                 onClick={() => setShowSubmenu(!showSubmenu)}
                 className="flex items-center justify-between w-full px-4 py-2 text-white transition-colors rounded-lg hover:bg-secondary-900"
@@ -121,7 +121,7 @@ const Sidebar = () => {
                   </Link>
                 </li>
               </ul>
-            </li>
+            </li> */}
 
             {/* <li>
               <Link
@@ -136,9 +136,9 @@ const Sidebar = () => {
         <nav>
           <Link
             to="/"
-            className="flex items-center gap-4 px-4 py-2 text-white transition-colors rounded-lg hover:bg-secondary-900"
+            className="flex items-center gap-4 px-4 py-4 text-white transition-colors rounded-lg hover:bg-zinc-800 cursor-pointer"
           >
-            <RiLogoutCircleRLine className="text-[#4791ff]" />{" "}
+            <RiLogoutCircleRLine className="text-yellow-300" />{" "}
             <button onClick={handleLogout}>Cerrar sesión</button>
           </Link>
         </nav>

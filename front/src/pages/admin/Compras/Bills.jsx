@@ -328,18 +328,6 @@ export default function App() {
           >
             Export to PDF
           </button>
-          <div>
-            <Button color="primary" className="w-[130px] absolute right-0">
-              <Link to="/compras/add">Añadir Factura</Link>
-            </Button>
-          </div>
-        </div>
-        <div>
-          {/* Botón para exportar a Excel */}
-          {/* <button onClick={handleExportExcel}>Export to Excel</button> */}
-          {/* Botón para exportar a PDF */}
-
-          {/* Resto del código... */}
         </div>
       </div>
     );

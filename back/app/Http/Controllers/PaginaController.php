@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bitacora;
 use App\Models\pagina;
 use Illuminate\Http\Request;
 
@@ -37,6 +38,7 @@ class PaginaController extends Controller
         ]);
 
         $pagina = Pagina::create($request->all());
+        Bitacora::add("Pagina WEB creada con id: {$pagina->id}");
         return response()->json($pagina, 201);
     }
 

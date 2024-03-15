@@ -6,10 +6,11 @@ const EditProveedo = () => {
   const { id } = useParams();
   const [proveedor, setProveedor] = useState({
     nombre: "",
-    email: "",
-    compañia: "",
+    id_estado: "",
   });
-  /* console.log(proveedor) */
+  const [estados, setEstados] = useState([]);
+  const [roles, setRoles] = useState([]);
+
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setProveedor({ ...proveedor, [name]: value });
@@ -18,7 +19,7 @@ const EditProveedo = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch(`http://127.0.0.1:8000/api/proveedore/${id}`, {
+    fetch(`http://127.0.0.1:8000/api/roles/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -29,18 +30,25 @@ const EditProveedo = () => {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        // Limpiar los valores de los inputs
-        setProveedor({ nombre: "", email: "", compañia: "" });
+        setProveedor({ nombre: "", id_estado: "" });
       })
       .catch((error) => console.log(error));
   };
 
   useEffect(() => {
-    fetch(`http://127.0.0.1:8000/api/proveedore/${id}`)
+    fetch(`http://127.0.0.1:8000/api/estados`)
       .then((res) => res.json())
-      .then((data) => setProveedor(data))
+      .then((data) => setEstados(data))
       .catch((error) => console.error(error));
-  }, [id]);
+  }, []);
+
+  // useEffect(() => {
+  //   fetch(`http://127.0.0.1:8000/api/roles`)
+  //     .then((res) => res.json())
+  //     .then((data) => setRoles(data))
+  //     .catch((error) => console.error(error));
+  // }, []);
+  console.log(roles);
 
   return (
     <div>
@@ -48,7 +56,7 @@ const EditProveedo = () => {
         <div className="flex justify-between">
           <h2 className="text-xl font-semibold mb-4">Actualizar Proveedor</h2>
           <Button color="primary" className="w-[80px]">
-            <Link to="/proveedores">Back</Link>
+            <Link to="/roles">Back</Link>
           </Button>
         </div>
         <form onSubmit={handleSubmit} className="grid grid-cols-3 gap-12">
@@ -64,37 +72,32 @@ const EditProveedo = () => {
               id="nombre"
               name="nombre"
               className="mt-1 p-2 border rounded w-full"
-              placeholder={proveedor.nombre}
+              placeholder="Nombre Proveedor"
+              value={proveedor.nombre}
               onChange={handleInputChange}
             />
             <label
-              htmlFor="email"
+              htmlFor="id_estado"
               className="block text-sm font-medium text-gray-700"
             >
-              Email
+              Estado
             </label>
-            <input
-              type="text"
-              id="email"
-              name="email"
+            <select
+              name="id_estado"
+              id="id_estado"
               className="mt-1 p-2 border rounded w-full"
-              placeholder={proveedor.email}
+              value={proveedor.id_estado}
               onChange={handleInputChange}
-            />
-            <label
-              htmlFor="compañia"
-              className="block text-sm font-medium text-gray-700"
             >
-              Compañia
-            </label>
-            <input
-              type="text"
-              id="compañia"
-              name="compañia"
-              className="mt-1 p-2 border rounded w-full"
-              placeholder={proveedor.compañia}
-              onChange={handleInputChange}
-            />
+              <option value="" disabled>
+                Selecciona un Estado
+              </option>
+              {estados.map((estado) => (
+                <option key={estado.id} value={estado.id}>
+                  {estado.nombre}
+                </option>
+              ))}
+            </select>
           </div>
 
           <button

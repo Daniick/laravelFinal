@@ -3,66 +3,64 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 function Add() {
-  const [productName, setProductName] = useState("");
-  const [productCode, setProductCode] = useState("");
-  const [productBrand, setProductBrand] = useState("");
-  const [categoryId, setCategoryId] = useState("");
-  const [productQuantity, setProductQuantity] = useState("");
-  const [productCosto, setProductCosto] = useState("");
-  const [productPrice, setProductPrice] = useState("");
+  const [name, setName] = useState("");
+  const [apellido, setApellido] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [idCategoria, setIdCategoria] = useState("");
   const [inventario, setInventario] = useState([]);
+  const [estado, setEstado] = useState([]);
+
+  useEffect(() => {
+    fetch("http://127.0.0.1:8000/api/roles")
+      .then((res) => res.json())
+      .then((data) => setInventario(data))
+      .catch((error) => console.error(error));
+  }, []);
+
+  // useEffect(() => {
+  //   fetch("http://127.0.0.1:8000/api/estados")
+  //     .then((res) => res.json())
+  //     .then((data) => setEstado(data))
+  //     .catch((error) => console.error(error));
+  // }, []);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-
     switch (name) {
-      case "nombre":
-        setProductName(value);
+      case "name":
+        setName(value);
         break;
-      case "cod":
-        setProductCode(value);
+      case "apellido":
+        setApellido(value);
         break;
-      case "marca":
-        setProductBrand(value);
+      case "email":
+        setEmail(value);
         break;
-      case "id_categoria":
-        setCategoryId(value);
+      case "password":
+        setPassword(value);
         break;
-      case "cantidad":
-        setProductQuantity(value);
-        break;
-      case "costo":
-        setProductCosto(value);
-        break;
-      case "precio":
-        setProductPrice(value);
+      case "id_rol":
+        setIdCategoria(value);
         break;
       default:
         break;
     }
   };
-  useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/categoria")
-      .then((res) => res.json())
-      .then((dataCategorias) => setInventario(dataCategorias))
-      .catch((error) => console.error(error));
-  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const formData = new FormData(e.target);
     const data = {
-      nombre: productName,
-      cod: productCode,
-      precio: productPrice,
-      marca: productBrand,
-      id_categoria: categoryId,
-      costo: productCosto,
-      cantidad: productQuantity,
+      name,
+      apellido,
+      email,
+      password,
+      id_rol: idCategoria,
+      // id_estado: estado,
     };
 
-    fetch("http://127.0.0.1:8000/api/producto", {
+    fetch("http://127.0.0.1:8000/api/usuarios", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -72,25 +70,26 @@ function Add() {
     })
       .then((response) => response.json())
       .then((data) => {
-        setProductName("");
-        setProductCode("");
-        setProductBrand("");
-        setCategoryId("");
-        setProductQuantity("");
-        setProductCosto("");
-        setProductPrice("");
+        // console.log(data);
+        setName("");
+        setApellido("");
+        setEmail("");
+        setPassword("");
+        setIdCategoria("");
       })
       .catch((error) => console.log(error));
   };
 
   return (
     <>
-      <div className="w-[100%] h-[85%] mx-auto p-6 bg-white rounded shadow">
+      <div className="w-full h-full mx-auto p-6 bg-white rounded shadow">
         <div className="flex justify-between">
-          <h2 className="text-xl font-semibold mb-4">Añadir Producto</h2>
-          <Button color="primary" className="w-[80px]">
-            <Link to="/Inventario">Back</Link>
-          </Button>
+          <h2 className="text-xl font-semibold mb-4">Añadir Usuario</h2>
+          <Link to="/usuarios">
+            <Button color="primary" className="w-[80px]">
+              Back
+            </Button>
+          </Link>
         </div>
 
         <form onSubmit={handleSubmit} className="grid grid-cols-3 gap-12">
@@ -99,66 +98,81 @@ function Add() {
               htmlFor="name"
               className="block text-sm font-medium text-gray-700"
             >
-              Nombre del Producto *
+              Nombre del Usuario
             </label>
             <input
               type="text"
-              id="nombre"
-              name="nombre"
-              value={productName}
+              id="name"
+              name="name"
+              value={name}
               className="mt-1 p-2 border rounded w-full"
               onChange={handleInputChange}
             />
           </div>
           <div>
             <label
-              htmlFor="barcode"
+              htmlFor="apellido"
               className="block text-sm font-medium text-gray-700"
             >
-              Código de Producto *
+              Apellido del Usuario
             </label>
             <input
               type="text"
-              id="cod"
-              name="cod"
-              value={productCode}
+              id="apellido"
+              name="apellido"
+              value={apellido}
               className="mt-1 p-2 border rounded w-full"
               onChange={handleInputChange}
             />
           </div>
           <div>
             <label
-              htmlFor="brand"
+              htmlFor="email"
               className="block text-sm font-medium text-gray-700"
             >
-              Marca
+              Email del Usuario
             </label>
             <input
               type="text"
-              id="marca"
-              name="marca"
-              value={productBrand}
+              id="email"
+              name="email"
+              value={email}
               className="mt-1 p-2 border rounded w-full"
               onChange={handleInputChange}
             />
           </div>
-
           <div>
             <label
-              htmlFor="category"
+              htmlFor="password"
               className="block text-sm font-medium text-gray-700"
             >
-              Categoria *
+              Contraseña
+            </label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={password}
+              className="mt-1 p-2 border rounded w-full"
+              onChange={handleInputChange}
+            />
+          </div>
+          <div>
+            <label
+              htmlFor="id_rol"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Rol
             </label>
             <select
-              id="id_categoria"
-              name="id_categoria"
-              value={categoryId}
+              id="id_rol"
+              name="id_rol"
+              value={idCategoria}
               className="mt-1 p-2 border rounded w-full"
               onChange={handleInputChange}
             >
               <option value="" disabled>
-                Selecciona
+                Selecciona un Rol
               </option>
               {inventario.map((item) => (
                 <option key={item.id} value={item.id}>
@@ -166,54 +180,6 @@ function Add() {
                 </option>
               ))}
             </select>
-          </div>
-          <div>
-            <label
-              htmlFor="productUnit"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Unidad de Producto *
-            </label>
-            <input
-              type="text"
-              id="cantidad"
-              name="cantidad"
-              value={productQuantity}
-              className="mt-1 p-2 border rounded w-full"
-              onChange={handleInputChange}
-            />
-          </div>
-          <div>
-            <label
-              htmlFor="cost"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Precio del Producto *
-            </label>
-            <input
-              type="text"
-              id="precio"
-              name="precio"
-              value={productPrice}
-              className="mt-1 p-2 border rounded w-full"
-              onChange={handleInputChange}
-            />
-          </div>
-          <div>
-            <label
-              htmlFor="costo"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Costo del Producto *
-            </label>
-            <input
-              type="text"
-              id="costo"
-              name="costo"
-              value={productCosto}
-              className="mt-1 p-2 border rounded w-full"
-              onChange={handleInputChange}
-            />
           </div>
 
           <button

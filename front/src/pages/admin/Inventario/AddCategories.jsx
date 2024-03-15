@@ -3,28 +3,34 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 function AddCategories() {
-  const [categoryName, setCategoryName] = useState("");
-  const [codeCategoria, setCodeCategoria] = useState("");
+  const [url, setUrl] = useState("");
+  const [nombre, setNombre] = useState("");
+  const [descripcion, setDescripcion] = useState("");
 
-  const handleInputChange = (event) => {
-    setCategoryName(event.target.value);
+  const handleUrlChange = (event) => {
+    setUrl(event.target.value);
   };
-  const inputChange = (event) => {
-    setCodeCategoria(event.target.value);
+
+  const handleNombreChange = (event) => {
+    setNombre(event.target.value);
+  };
+
+  const handleDescripcionChange = (event) => {
+    setDescripcion(event.target.value);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const formData = new FormData(e.target);
     const data = {
-      nombre: formData.get("nombre"),
-      codigo: formData.get("codigo"),
+      url,
+      nombre,
+      descripcion,
     };
 
-    console.log("Product data submitted:");
+    console.log("Page data submitted:", data);
 
-    fetch("http://127.0.0.1:8000/api/categoria", {
+    fetch("http://127.0.0.1:8000/api/paginas", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -35,9 +41,9 @@ function AddCategories() {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        // Borrar los datos del input
-        setCategoryName("");
-        setCodeCategoria("");
+        setUrl("");
+        setNombre("");
+        setDescripcion("");
       })
       .catch((error) => console.log(error));
   };
@@ -46,40 +52,54 @@ function AddCategories() {
     <>
       <div className="w-[100%] h-[60%] mx-auto p-6 bg-white rounded shadow ">
         <div className="flex justify-between">
-          <h2 className="text-xl font-semibold mb-4">Añadir Categoria</h2>
+          <h2 className="text-xl font-semibold mb-4">Añadir Página</h2>
           <Button color="primary" className="w-[80px]">
-            <Link to="/categorias">Back</Link>
+            <Link to="/paginas">Back</Link>
           </Button>
         </div>
         <form onSubmit={handleSubmit} className="grid grid-cols-3 gap-12">
           <div className="">
             <label
+              htmlFor="url"
+              className="block text-sm font-medium text-gray-700"
+            >
+              URL *
+            </label>
+            <input
+              type="text"
+              id="url"
+              name="url"
+              className="mt-1 p-2 border rounded w-full"
+              value={url}
+              onChange={handleUrlChange}
+            />
+            <label
               htmlFor="nombre"
               className="block text-sm font-medium text-gray-700"
             >
-              Nombre de la Categoria *
+              Nombre de la Página
             </label>
             <input
               type="text"
               id="nombre"
               name="nombre"
               className="mt-1 p-2 border rounded w-full"
-              value={categoryName}
-              onChange={handleInputChange}
+              value={nombre}
+              onChange={handleNombreChange}
             />
             <label
-              htmlFor="codigo"
+              htmlFor="descripcion"
               className="block text-sm font-medium text-gray-700"
             >
-              Codigo de la Categoria*
+              Descripción *
             </label>
             <input
               type="text"
-              id="codigo"
-              name="codigo"
+              id="descripcion"
+              name="descripcion"
               className="mt-1 p-2 border rounded w-full"
-              value={codeCategoria}
-              onChange={inputChange}
+              value={descripcion}
+              onChange={handleDescripcionChange}
             />
           </div>
 

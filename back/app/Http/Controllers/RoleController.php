@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bitacora;
 use App\Models\role;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roles = role::all();
+        $roles = role::with('estado')->get();
         return response()->json($roles, 200);
     }
 
@@ -34,6 +35,7 @@ class RoleController extends Controller
         ]);
 
         $roles = role::create($request->all());
+        Bitacora::add("Rol creado con id: {$roles->id}");
         return response()->json($roles, 201);
     }
 
@@ -60,7 +62,8 @@ class RoleController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'nombre' => 'required|string|unique:roles'
+            'nombre' => 'required|string',
+            'id_estado' => 'required'
         ]);
 
         $roles = role::findOrFail($id);

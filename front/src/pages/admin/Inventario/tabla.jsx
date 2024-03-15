@@ -75,7 +75,23 @@ export default function App() {
       .catch((error) => console.error(error));
   }, []);
 
-  console.log(productos);
+  const handleDelete = (id) => {
+    fetch(`http://127.0.0.1:8000/api/usuarios/${id}`, {
+      method: "DELETE",
+    })
+      .then((response) => {
+        if (response.ok) {
+          // Eliminar el usuario de la lista local de productos
+          setProductos(productos.filter((producto) => producto.id !== id));
+        } else {
+          // Manejar errores si la solicitud no fue exitosa
+          console.error("Failed to delete user");
+        }
+      })
+      .catch((error) => {
+        console.error("Error deleting user:", error);
+      });
+  };
 
   const headerColumns = React.useMemo(() => {
     if (visibleColumns === "all") return columns;
@@ -90,7 +106,7 @@ export default function App() {
 
     if (filterValue) {
       filteredProductos = filteredProductos.filter((producto) =>
-        producto.nombre.toLowerCase().includes(filterValue.toLowerCase())
+        producto.name.toLowerCase().includes(filterValue.toLowerCase())
       );
     }
 
@@ -127,7 +143,7 @@ export default function App() {
 
   const renderCell = React.useCallback((producto, columnKey) => {
     const cellValue = producto[columnKey];
-    console.log(producto);
+
     switch (columnKey) {
       case "imagen":
         return (
@@ -166,7 +182,7 @@ export default function App() {
           <div className="flex flex-col">
             <p className="text-bold text-small capitalize"></p>
             <p className="text-bold text-tiny capitalize text-default-400">
-              {producto.id_estado}
+              {producto.estado.nombre}
             </p>
           </div>
         );
@@ -176,7 +192,7 @@ export default function App() {
           <div className="flex flex-col">
             <p className="text-bold text-small capitalize"></p>
             <p className="text-bold text-tiny capitalize text-default-400">
-              {producto.id_rol}
+              {producto.role.nombre}
             </p>
           </div>
         );
@@ -194,11 +210,12 @@ export default function App() {
                 <DropdownItem
                   startContent={<EditIcon className={iconClasses} />}
                 >
-                  <Link to={`/inventario/edit/${producto.id}`}>Edit</Link>
+                  <Link to={`/usuarios/edit/${producto.id}`}>Edit</Link>
                 </DropdownItem>
 
                 <DropdownItem
                   startContent={<DeleteIcon className={iconClasses} />}
+                  onClick={() => handleDelete(producto.id)}
                 >
                   Delete
                 </DropdownItem>
@@ -369,9 +386,11 @@ export default function App() {
             Export to PDF
           </button>
           <div>
-            <Button color="primary" className="w-[130px] absolute right-0">
-              <Link to="/inventario/add">Añadir Producto</Link>
-            </Button>
+            <Link to="/usuarios/add">
+              <Button color="primary" className="w-[130px] absolute right-0">
+                Añadir Usuario
+              </Button>
+            </Link>
           </div>
         </div>
         <div>
